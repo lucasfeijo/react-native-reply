@@ -1,6 +1,6 @@
 {
   "name": "react-native-reply",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Easy @mentions, non-intrusive logic, BYO TextInput",
   "files": [
     "lib/**/*",
@@ -12,7 +12,7 @@
     "prepare": "yarn build",
     "prepublishOnly": "yarn lint",
     "preversion": "yarn lint",
-    "build": "tsc",
+    "build": "tsc && cp src/*.js lib",
     "format": "prettier --write \"src/**/*.tsx\"",
     "lint": "tslint -p tsconfig.json"
   },
