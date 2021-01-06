@@ -2,20 +2,25 @@
   "compilerOptions": {
     "target": "es5",
     "lib": [
-      "es6"
+      "es2017",
+      "es7",
+      "es6",
+      "dom"
     ],
     "module": "commonjs",
     "declaration": true,
     "outDir": "./lib",
     "strict": false,
-    "jsx": "react",
+    "jsx": "react-native",
     "allowSyntheticDefaultImports": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "esModuleInterop": true
   },
   "include": [
     "src"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "lib"
   ]
 }

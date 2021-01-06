@@ -1,13 +1,13 @@
 {
   "name": "react-native-reply",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Easy @mentions, non-intrusive logic, BYO TextInput",
   "files": [
     "lib/**/*",
     "src"
   ],
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "main": "lib/index",
+  "types": "lib/index",
   "scripts": {
     "prepare": "yarn build",
     "prepublishOnly": "yarn lint",
