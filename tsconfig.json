@@ -11,7 +11,7 @@
     "declaration": true,
     "outDir": "./lib",
     "strict": false,
-    "jsx": "react-native",
+    "jsx": "react",
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
     "esModuleInterop": true
