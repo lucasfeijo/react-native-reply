@@ -20,7 +20,7 @@ type MentionsInputReturn = [
     children: Renderable | Renderable[]
   },
   {
-    isTracking: boolean
+    isMentioning: boolean
     keyword: string
     onSuggestionPick: (user: User) => void
     inputText: string
@@ -34,7 +34,7 @@ type State = {
   formattedText: Renderable | Renderable[]
   selection: Selection
   inputText: string
-  isTracking: boolean
+  isMentioning: boolean
   keyword: string
   mentionPosition?: number
 }
@@ -43,7 +43,7 @@ const defaultState = {
   mentionsMap: new Map(),
   formattedText: [],
   inputText: '',
-  isTracking: false,
+  isMentioning: false,
   keyword: '',
   selection: {
     start: 0,
@@ -148,7 +148,7 @@ export const useMentionsInput = (props: InputProps = defaultProps): MentionsInpu
         ...state,
         inputText: text
       }),
-      isTracking: false
+      isMentioning: false
     })
   }
 
@@ -165,17 +165,17 @@ export const useMentionsInput = (props: InputProps = defaultProps): MentionsInpu
     const lastChar = inputText.substr(mentionIndex, 1)
     if (lastChar === props.trigger) {
       newState.mentionPosition = mentionIndex
-      newState.isTracking = true
+      newState.isMentioning = true
       newState.keyword = ''
-    } else if (lastChar.trim() === '' && newState.isTracking) {
-      newState.isTracking = false
+    } else if (lastChar.trim() === '' && newState.isMentioning) {
+      newState.isMentioning = false
     }
     /**
      * filter the mentions list
      * according to what user type with
      * @ char e.g. @billroy
      */
-    if (newState.isTracking && typeof newState.mentionPosition !== 'undefined') {
+    if (newState.isMentioning && typeof newState.mentionPosition !== 'undefined') {
       const pattern = new RegExp(`\\${props.trigger}[a-z0-9_-]+|\\${props.trigger}`, 'i')
       const str = inputText.substr(newState.mentionPosition)
       const keywordArray = str.match(pattern)
@@ -331,7 +331,7 @@ export const useMentionsInput = (props: InputProps = defaultProps): MentionsInpu
       selection: state.selection
     },
     {
-      isTracking: state.isTracking,
+      isMentioning: state.isMentioning,
       keyword: state.keyword,
       onSuggestionPick,
       inputText: state.inputText,
