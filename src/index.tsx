@@ -12,7 +12,7 @@ type User = { id: string; name: string; username: string }
 type Renderable = string | JSX.Element
 
 const defaultProps = {
-  trigger: '@',
+  trigger: '@'
 }
 
 type MentionsInputReturn = [
@@ -26,7 +26,7 @@ type MentionsInputReturn = [
     inputText: string
     rawText: string
     setRawText: (t: string) => void
-  },
+  }
 ]
 
 type State = {
@@ -47,8 +47,8 @@ const defaultState = {
   keyword: '',
   selection: {
     start: 0,
-    end: 0,
-  },
+    end: 0
+  }
 }
 
 export const useMentionsInput = (props: InputProps = defaultProps): MentionsInputReturn => {
@@ -67,7 +67,7 @@ export const useMentionsInput = (props: InputProps = defaultProps): MentionsInpu
     newState.formattedText = formatText(newState)
     newState.selection = {
       start: t.length - 1,
-      end: t.length - 1,
+      end: t.length - 1
     }
     setState(newState)
   }
@@ -103,7 +103,7 @@ export const useMentionsInput = (props: InputProps = defaultProps): MentionsInpu
      */
     const adjMentIndexes = {
       start: initialStr.length - 1,
-      end: inputText.length - remStr.length - 1,
+      end: inputText.length - remStr.length - 1
     }
     const mentionKeys = utils.getSelectedMentionKeys(state.mentionsMap, adjMentIndexes)
     mentionKeys.forEach(key => {
@@ -111,7 +111,7 @@ export const useMentionsInput = (props: InputProps = defaultProps): MentionsInpu
     })
     return {
       initialStr,
-      remStr,
+      remStr
     }
   }
 
@@ -134,18 +134,21 @@ export const useMentionsInput = (props: InputProps = defaultProps): MentionsInpu
       state,
       {
         start: menEndIndex + 1,
-        end: text.length,
+        end: text.length
       },
       charAdded,
-      true,
+      true
     )
 
     setState({
       ...state,
       mentionsMap,
       inputText: text,
-      formattedText: formatText(state),
-      isTracking: false,
+      formattedText: formatText({
+        ...state,
+        inputText: text
+      }),
+      isTracking: false
     })
   }
 
@@ -186,11 +189,11 @@ export const useMentionsInput = (props: InputProps = defaultProps): MentionsInpu
 
   const onSelectionChange = ({ nativeEvent: { selection } }) => {
     const prevSelc = state.selection
-    let newSelc = { ...selection }
+    let newSelc: Selection = { ...selection }
     if (newSelc.start !== newSelc.end) {
       newSelc = utils.addMenInSelection(newSelc, prevSelc, state.mentionsMap)
     }
-    setState({ ...state, selection: newSelc })
+    if (prevSelc.start !== newSelc.start || prevSelc.end !== newSelc.end) setState({ ...state, selection: newSelc })
   }
 
   const formatMentionNode = (user: User, pos: Selection): Renderable => {
@@ -213,7 +216,7 @@ export const useMentionsInput = (props: InputProps = defaultProps): MentionsInpu
    */
   const formatText = (
     { inputText, mentionsMap }: State,
-    renderMention: (user: User, pos: Selection) => Renderable = formatMentionNode,
+    renderMention: (user: User, pos: Selection) => Renderable = formatMentionNode
   ): Renderable[] => {
     if (inputText === '' || !mentionsMap.size) return [inputText]
     const formattedText: any[] = []
@@ -247,7 +250,7 @@ export const useMentionsInput = (props: InputProps = defaultProps): MentionsInpu
       let charDeleted = Math.abs(text.length - prevText.length)
       const totalSelection = {
         start: selection.start,
-        end: charDeleted > 1 ? selection.start + charDeleted : selection.start,
+        end: charDeleted > 1 ? selection.start + charDeleted : selection.start
       }
       /**
        * Remove all the selected mentions
@@ -283,10 +286,10 @@ export const useMentionsInput = (props: InputProps = defaultProps): MentionsInpu
         newState,
         {
           start: selection.end,
-          end: prevText.length,
+          end: prevText.length
         },
         charDeleted,
-        false,
+        false
       )
     } else {
       // update indexes on new charcter add
@@ -295,10 +298,10 @@ export const useMentionsInput = (props: InputProps = defaultProps): MentionsInpu
         newState,
         {
           start: selection.end,
-          end: text.length,
+          end: text.length
         },
         charAdded,
-        true,
+        true
       )
       /**
        * if user type anything on the mention
@@ -325,7 +328,7 @@ export const useMentionsInput = (props: InputProps = defaultProps): MentionsInpu
       children: state.formattedText,
       onChangeText,
       onSelectionChange,
-      selection: state.selection,
+      selection: state.selection
     },
     {
       isTracking: state.isTracking,
@@ -333,8 +336,8 @@ export const useMentionsInput = (props: InputProps = defaultProps): MentionsInpu
       onSuggestionPick,
       inputText: state.inputText,
       rawText,
-      setRawText,
-    },
+      setRawText
+    }
   ]
 }
 
@@ -343,6 +346,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '400',
     backgroundColor: 'rgba(36, 77, 201, 0.05)',
-    color: '#244dc9',
-  },
+    color: '#244dc9'
+  }
 })
