@@ -16,7 +16,7 @@ declare type Renderable = string | JSX.Element;
 declare type MentionsInputReturn = [TextInputProps & {
     children: Renderable | Renderable[];
 }, {
-    isTracking: boolean;
+    isMentioning: boolean;
     keyword: string;
     onSuggestionPick: (user: User) => void;
     inputText: string;

@@ -1,6 +1,6 @@
 {
   "name": "react-native-reply",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Easy @mentions, non-intrusive logic, BYO TextInput",
   "files": [
     "lib/**/*",
