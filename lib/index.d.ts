@@ -1,8 +1,8 @@
 import { TextInputProps } from 'react-native';
 declare type InputProps = {
     renderMention?: (user: User, pos: Selection) => Renderable;
-    trigger: string;
-    initialValue: string;
+    trigger?: string;
+    initialValue?: string;
 };
 declare type Selection = {
     start: number;
