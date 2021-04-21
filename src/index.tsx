@@ -5,6 +5,7 @@ import utils from './utils'
 type InputProps = {
   renderMention?: (user: User, pos: Selection) => Renderable
   trigger: string
+  initialValue: string
 }
 
 type Selection = { start: number; end: number }
@@ -12,7 +13,8 @@ type User = { id: string; name: string; username: string }
 type Renderable = string | JSX.Element
 
 const defaultProps = {
-  trigger: '@'
+  trigger: '@',
+  initialValue: ''
 }
 
 type MentionsInputReturn = [
@@ -52,7 +54,12 @@ const defaultState = {
 }
 
 export const useMentionsInput = (props: InputProps = defaultProps): MentionsInputReturn => {
-  const [state, setState] = useState<State>({ ...defaultState })
+  const initialState = {
+    ...defaultState,
+    formattedText: props.initialValue
+  }
+
+  const [state, setState] = useState<State>(initialState)
 
   const setRawText = (t: string) => {
     const newState: State = { ...defaultState }
