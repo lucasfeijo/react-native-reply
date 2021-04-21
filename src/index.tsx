@@ -4,8 +4,8 @@ import utils from './utils'
 
 type InputProps = {
   renderMention?: (user: User, pos: Selection) => Renderable
-  trigger: string
-  initialValue: string
+  trigger?: string
+  initialValue?: string
 }
 
 type Selection = { start: number; end: number }
@@ -54,12 +54,14 @@ const defaultState = {
 }
 
 export const useMentionsInput = (props: InputProps = defaultProps): MentionsInputReturn => {
-  const initialState = {
+  const [state, setState] = useState<State>(() =>
+  ({
     ...defaultState,
+    mentionsMap: utils.getMentionsWithInputText(props.initialValue).map,
+    inputText: utils.getMentionsWithInputText(props.initialValue).newValue,
     formattedText: props.initialValue
-  }
-
-  const [state, setState] = useState<State>(initialState)
+  })
+  )
 
   const setRawText = (t: string) => {
     const newState: State = { ...defaultState }
