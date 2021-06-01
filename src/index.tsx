@@ -57,9 +57,9 @@ export const useMentionsInput = (props: InputProps = defaultProps): MentionsInpu
   const [state, setState] = useState<State>(() =>
   ({
     ...defaultState,
-    mentionsMap: utils.getMentionsWithInputText(props.initialValue).map,
-    inputText: utils.getMentionsWithInputText(props.initialValue).newValue,
-    formattedText: props.initialValue
+    mentionsMap: utils.getMentionsWithInputText(props?.initialValue)?.map,
+    inputText: utils.getMentionsWithInputText(props?.initialValue)?.newValue,
+    formattedText: props?.initialValue
   })
   )
 
