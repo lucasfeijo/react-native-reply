@@ -57,9 +57,9 @@ export const useMentionsInput = (props: InputProps = defaultProps): MentionsInpu
   const [state, setState] = useState<State>(() =>
   ({
     ...defaultState,
-    mentionsMap: utils.getMentionsWithInputText(props.initialValue).map,
-    inputText: utils.getMentionsWithInputText(props.initialValue).newValue,
-    formattedText: props.initialValue
+    mentionsMap: utils.getMentionsWithInputText(props?.initialValue)?.map,
+    inputText: utils.getMentionsWithInputText(props?.initialValue)?.newValue,
+    formattedText: props?.initialValue
   })
   )
 
@@ -227,7 +227,7 @@ export const useMentionsInput = (props: InputProps = defaultProps): MentionsInpu
     { inputText, mentionsMap }: State,
     renderMention: (user: User, pos: Selection) => Renderable = formatMentionNode
   ): Renderable[] => {
-    if (inputText === '' || !mentionsMap.size) return [inputText]
+    if (inputText === '' || !mentionsMap?.size) return [inputText]
     const formattedText: any[] = []
     let lastIndex = 0
     mentionsMap.forEach((user, [start, end]) => {
